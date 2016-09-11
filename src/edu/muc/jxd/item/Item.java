@@ -1,12 +1,24 @@
 package edu.muc.jxd.item;
 
-public class Item<T> implements ItemInter {
-	public T data[];
-	public int length;
-
+public class Item<T extends Number> implements ItemInter {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 4519457391951715668L;
+	/**
+	 * 标志ID
+	 */
+	private int id;
+	/**
+	 * 真实的数据
+	 */
+	private T data[];
+	
+	/**
+	 * 构造方法
+	 */
 	public Item() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public T[] getData() {
@@ -26,13 +38,15 @@ public class Item<T> implements ItemInter {
 	}
 
 	public void setLength(int length) {
-		this.length = length;
 	}
 
-	@Override
-	public Object getDistance() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getId() {
+		return id;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
 }

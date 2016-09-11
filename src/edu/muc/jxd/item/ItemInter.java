@@ -1,5 +1,6 @@
 package edu.muc.jxd.item;
 
-public interface ItemInter<T> {
-	public T getDistance();
+import java.io.Serializable;
+
+public interface ItemInter extends Serializable{
 }
