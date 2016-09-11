@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Item<T> implements Serializable,ItemInter {
@@ -36,8 +37,49 @@ public class Item<T> implements Serializable,ItemInter {
 		super();
 	}
 
-	public List<Element<T>> getData() {
+	/**
+	 * This is used to return true data of Item
+	 * @return
+     */
+	public List<Element<T>> getItemData() {
 		return data;
+	}
+
+	public T[] getData(){
+		//TODO for getNumberArrays N[] problem
+		//data.toArray()
+		return (T[])getNumberArrays();
+	}
+
+	//Object[] =>  N[] ?
+	protected <N extends Number> Object[] getNumberArrays(){
+		if(data.isEmpty())
+			return null;
+		else{
+		    List<Number> numbers=new ArrayList<>();
+			Iterator<Element<T>> elementIterator=data.iterator();
+			if(!(data.get(0).getClassType().isAssignableFrom(Number.class))){
+				throw new ClassCastException("Type is not extends Number...");
+			}
+			while (elementIterator.hasNext()){
+				Element<Number> numberElement;
+				try{
+					numberElement=(Element<Number>)(elementIterator.next());
+					numbers.add(numberElement.plastic(new ElmentNumeralization<Number>() {
+						@Override
+						public int numberalization(Number number) {
+							return number.intValue()+22;
+						}
+					}));
+				}catch (Exception e){
+					System.err.println("Type Convert Number Error.");
+					e.printStackTrace();
+				}
+			}
+			// this is to return a father type about Number
+			return numbers.toArray();
+		}
+
 	}
 
 	/**
