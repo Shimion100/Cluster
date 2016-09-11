@@ -1,5 +1,6 @@
 package edu.muc.jxd.item;
 
+
 public class Item<T extends Number> implements ItemInter {
 	/**
 	 * serialVersionUID
@@ -46,7 +47,6 @@ public class Item<T extends Number> implements ItemInter {
 
 	public void setId(int id) {
 		this.id = id;
-	}
+	}	
 
-	
 }

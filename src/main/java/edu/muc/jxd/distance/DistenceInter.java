@@ -1,5 +1,6 @@
 package edu.muc.jxd.distance;
 
+
 import edu.muc.jxd.item.Item;
 
 /**
@@ -18,5 +19,6 @@ public interface DistenceInter {
 	 * @return 两个Item之间的距离
 	 */
 	public  <T extends Number> int getDistence(Item<T> a, Item<T> b);
+
 
 }
