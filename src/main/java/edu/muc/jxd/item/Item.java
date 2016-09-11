@@ -1,5 +1,7 @@
 package edu.muc.jxd.item;
 
+import org.apache.log4j.Logger;
+
 import java.io.Serializable;
 
 
@@ -58,9 +60,15 @@ public class Item<T> implements Serializable,ItemInter {
 		else{
 		    List<Number> numbers=new ArrayList<>();
 			Iterator<Element<T>> elementIterator=data.iterator();
+			Logger logger= Logger.getLogger(Item.class);
+			logger.debug(data.get(0));
+			logger.debug(data.get(0).getClassType());
+			logger.debug(data.get(0).getClassType().isAssignableFrom(Object.class));
+			/*
 			if(!(data.get(0).getClassType().isAssignableFrom(Number.class))){
 				throw new ClassCastException("Type is not extends Number...");
 			}
+			*/
 			while (elementIterator.hasNext()){
 				Element<Number> numberElement;
 				try{
@@ -88,6 +96,17 @@ public class Item<T> implements Serializable,ItemInter {
      */
 	public void setData(List<Element<T>> data){
 		this.data = data;
+		this.size=this.data.size();
+	}
+
+	public void setData(T[] data){
+		List<Element<T>> datas=new ArrayList<>();
+
+		for(int i=0;i<data.length;i++){
+			datas.add(new Element<T>(data[i]));
+		}
+
+		this.data=datas;
 		this.size=this.data.size();
 	}
 
