@@ -16,7 +16,7 @@ public class P {
 		}
 	}
 	
-	public void set(int i, int j, int value) {
+	public void setValue(int i, int j, int value) {
 		if (i >= this.value.length || j >= this.value[i].length || i < 0 || j < 0) {
 			return ;
 		} else {

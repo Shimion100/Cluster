@@ -5,13 +5,19 @@ import java.util.List;
 import javax.imageio.ImageTranscoder;
 
 import edu.muc.jxd.distance.DistenceInter;
+import edu.muc.jxd.item.ImageItemVector;
 import edu.muc.jxd.item.Item;
 import edu.muc.jxd.vo.Delta;
 import edu.muc.jxd.vo.P;
 
 public class Cluster {
 
-	private List<Item<Number>> itemList;
+	private List<ImageItemVector<Number>> itemList;
+	
+	/**
+	 * 计算距离的函数
+	 */
+	private DistenceInter distence;
 
 	/**
 	 * 用来计算小兵的肉
@@ -32,7 +38,8 @@ public class Cluster {
 	 * 构造函数
 	 * @param items
 	 */
-	public Cluster(List<Item<Number>> items) {
+	public Cluster(List<ImageItemVector<Number>> items, DistenceInter distance) {
+		this.distence = distance;
 		this.itemList = items;
 		this.p = new P(items.size());
 		this.delta = new Delta(items.size());
@@ -44,8 +51,8 @@ public class Cluster {
 	 */
 	public void initP() {
 		for(int i = 0; i < this.itemList.size(); i++) {
-			for (int j = 0; j < i; j++) {
-				
+			for (int j = i+1; j < this.itemList.size(); j++) {
+				this.p.setValue(i, j, diff(i, j, this.distence));
 			}
 		}
 	}
@@ -61,11 +68,11 @@ public class Cluster {
 		return distance.getDistence(itemList.get(i), itemList.get(j));
 	}
 
-	public List<Item<Number>> getItemList() {
+	public List<ImageItemVector<Number>> getItemList() {
 		return itemList;
 	}
 
-	public void setItemList(List<Item<Number>> itemList) {
+	public void setItemList(List<ImageItemVector<Number>> itemList) {
 		this.itemList = itemList;
 	}
 

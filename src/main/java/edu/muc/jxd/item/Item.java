@@ -2,10 +2,13 @@ package edu.muc.jxd.item;
 
 import org.apache.log4j.Logger;
 
+import java.io.ObjectStreamException;
 import java.io.Serializable;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,7 +19,7 @@ public class Item<T> implements Serializable,ItemInter {
 	protected List<Element<T>> data=new ArrayList<>();
 
 	protected int size=0;
-
+	private Logger logger= Logger.getLogger(Item.class);
 
 	/**
 	 * serialVersionUID
@@ -46,26 +49,21 @@ public class Item<T> implements Serializable,ItemInter {
 		return data;
 	}
 
-	public T[] getData(){
+	public <N extends Number> N[] getData(){
 		//TODO for getNumberArrays N[] problem
-		//data.toArray()
-		return (T[])getNumberArrays();
-	}
-
-
-	public int[] getData(ElementNumeralization elementNumberalization){
-		//TODO
+		//data.toArray()		
 		return null;
 	}
 
 	//Object[] =>  N[] ?
+	@SuppressWarnings("unchecked")
 	protected <N extends Number> Object[] getNumberArrays(){
 		if(data.isEmpty())
 			return null;
 		else{
-		    List<Number> numbers=new ArrayList<>();
+		    List<N> numbers=new ArrayList<>();
 			Iterator<Element<T>> elementIterator=data.iterator();
-			Logger logger= Logger.getLogger(Item.class);
+			
 			logger.debug(data.get(0));
 			logger.debug(data.get(0).getClassType());
 			logger.debug(data.get(0).getClassType().isAssignableFrom(Object.class));
@@ -73,23 +71,25 @@ public class Item<T> implements Serializable,ItemInter {
 			if(!(data.get(0).getClassType().isAssignableFrom(Number.class))){
 				throw new ClassCastException("Type is not extends Number...");
 			}
-			*/
+			*/		
 			while (elementIterator.hasNext()){
-				Element<Number> numberElement;
+				Element<N> numberElement;
 				try{
-					numberElement=(Element<Number>)(elementIterator.next());
-					numbers.add(numberElement.plastic(new ElementNumeralization<Number>() {
+					numberElement=(Element<N>)(elementIterator.next());
+					numbers.add((N)(new Double(numberElement.plastic(new ElmentNumeralization<N>() {
 						@Override
 						public int numberalization(Number number) {
 							return number.intValue()+22;
 						}
-					}));
+					}))));					
 				}catch (Exception e){
 					System.err.println("Type Convert Number Error.");
 					e.printStackTrace();
 				}
 			}
 			// this is to return a father type about Number
+			logger.debug(Arrays.toString(numbers.toArray()));
+			//numbers.toArray(T[] a)
 			return numbers.toArray();
 		}
 
