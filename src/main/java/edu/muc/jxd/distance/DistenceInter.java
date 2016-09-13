@@ -1,6 +1,7 @@
 package edu.muc.jxd.distance;
 
 
+import edu.muc.jxd.item.ImageItemVector;
 import edu.muc.jxd.item.Item;
 
 /**
@@ -18,7 +19,7 @@ public interface DistenceInter {
 	 * @param b 第二个Item
 	 * @return 两个Item之间的距离
 	 */
-	public  <T extends Number> int getDistence(Item<T> a, Item<T> b);
+	public  <T extends Number> int getDistence(ImageItemVector<T> a, ImageItemVector<T> b);
 
 
 }
