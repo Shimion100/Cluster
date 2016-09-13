@@ -76,12 +76,15 @@ public class Item<T> implements Serializable,ItemInter {
 				Element<N> numberElement;
 				try{
 					numberElement=(Element<N>)(elementIterator.next());
+					//TODO this is an error to convert it to save the model.
+					/*
 					numbers.add((N)(new Double(numberElement.plastic(new ElmentNumeralization<N>() {
 						@Override
 						public int numberalization(Number number) {
 							return number.intValue()+22;
 						}
-					}))));					
+					}))));
+						*/
 				}catch (Exception e){
 					System.err.println("Type Convert Number Error.");
 					e.printStackTrace();
