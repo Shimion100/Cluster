@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import java.io.Serializable;
 
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -53,6 +52,12 @@ public class Item<T> implements Serializable,ItemInter {
 		return (T[])getNumberArrays();
 	}
 
+
+	public int[] getData(ElementNumeralization elementNumberalization){
+		//TODO
+		return null;
+	}
+
 	//Object[] =>  N[] ?
 	protected <N extends Number> Object[] getNumberArrays(){
 		if(data.isEmpty())
@@ -73,7 +78,7 @@ public class Item<T> implements Serializable,ItemInter {
 				Element<Number> numberElement;
 				try{
 					numberElement=(Element<Number>)(elementIterator.next());
-					numbers.add(numberElement.plastic(new ElmentNumeralization<Number>() {
+					numbers.add(numberElement.plastic(new ElementNumeralization<Number>() {
 						@Override
 						public int numberalization(Number number) {
 							return number.intValue()+22;

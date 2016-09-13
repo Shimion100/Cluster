@@ -5,7 +5,7 @@ import java.lang.reflect.Type;
 /**
  * Created by gwd on 9/10/2016.
  */
-public class Element<T> {
+public class Element<T> implements ElementNumeralization{
 
     protected T t;
 
@@ -32,11 +32,17 @@ public class Element<T> {
         return t;
     }
 
-    public int plastic(ElmentNumeralization<T> elmentNumeralization){
-       return elmentNumeralization.numberalization(t);
+    public int plastic(ElementNumeralization<T> elementNumeralization){
+       return elementNumeralization.numberalization(t);
     }
 
     public Class<?> getClassType(){
         return clazz;
+    }
+
+    @Override
+    public int numberalization(Object o) {
+
+        return 0;
     }
 }
