@@ -62,7 +62,9 @@ public class P {
 	public void optimizeDc() {
 
 		// 条件要改,不应该是10000次。
-		for (int i = 0; i < 10000; i++) {
+		int max = (int) (255 * this.p.length * 0.5);
+
+		for (int i = 0; i < max; i++) {
 			this.dc = i;
 			this.initP();
 			// 开始计算熵
