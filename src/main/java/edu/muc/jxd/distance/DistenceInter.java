@@ -2,7 +2,6 @@ package edu.muc.jxd.distance;
 
 
 import edu.muc.jxd.item.ImageItemVector;
-import edu.muc.jxd.item.Item;
 
 /**
  * 计算距离的接口

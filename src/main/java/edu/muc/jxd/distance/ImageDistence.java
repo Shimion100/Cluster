@@ -5,7 +5,6 @@ import java.util.Arrays;
 import org.apache.log4j.Logger;
 
 import edu.muc.jxd.item.ImageItemVector;
-import edu.muc.jxd.item.Item;
 
 public class ImageDistence implements DistenceInter {
 
