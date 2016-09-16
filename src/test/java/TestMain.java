@@ -21,6 +21,7 @@ public class TestMain {
         logger.debug(object.getImagesData().toArray());
         Iterator<ImageItemXmlElement> images=object.getImagesData().iterator();
         while (images.hasNext()){
+        	logger.debug(images);
             logger.debug(images.next().getData().toString()); 
         }
     }
