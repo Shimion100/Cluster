@@ -1,5 +1,7 @@
+import edu.muc.jxd.item.ImageItemVector;
 import edu.muc.jxd.item.ImageItemXml;
 import edu.muc.jxd.item.ImageItemXmlElement;
+import edu.muc.jxd.tools.JSONTool;
 import edu.muc.jxd.tools.PathKit;
 import edu.muc.jxd.tools.XmlUtil;
 import org.apache.log4j.Logger;
@@ -21,7 +23,8 @@ public class TestMain {
         logger.debug(object.getImagesData().toArray());
         Iterator<ImageItemXmlElement> images=object.getImagesData().iterator();
         while (images.hasNext()){
-            logger.debug(images.next().getData().toString());
+            ImageItemXmlElement imageItemXmlElement=images.next();
+            logger.debug(imageItemXmlElement.getDataToImageItemVector().getData().length);
         }
     }
 }
