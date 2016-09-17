@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import edu.muc.jxd.item.ImageItemXml;
 import edu.muc.jxd.item.ImageItemXmlElement;
+import edu.muc.jxd.tools.CommonsBetwixt;
 import edu.muc.jxd.tools.PathKit;
 import edu.muc.jxd.tools.XmlUtil;
 
@@ -23,10 +24,11 @@ public class TestMain {
 				PathKit.getRootClassPath() + "\\image.xml");
 		logger.debug(object.getImagesData().toArray());
 		Iterator<ImageItemXmlElement> images = object.getImagesData().iterator();
+		CommonsBetwixt.persistObjectToFile(images);
 		while (images.hasNext()) {
 			ImageItemXmlElement imageItemXmlElement = images.next();
 			logger.debug(imageItemXmlElement.getDataToImageItemVector().getData().length);
 		}
-		
+		CommonsBetwixt.persistObjectToFile(images);
 	}
 }

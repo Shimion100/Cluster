@@ -1,15 +1,10 @@
 package edu.muc.jxd.tools;
-
-import edu.muc.jxd.item.ImageItemXml;
-import edu.muc.jxd.item.ImageItemXmlElement;
 import org.apache.commons.betwixt.io.BeanWriter;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
 import java.beans.IntrospectionException;
 import java.io.*;
-import java.util.Date;
-import java.util.Iterator;
 
 /**
  * Created by gwd on 9/17/2016.
@@ -25,7 +20,7 @@ public class CommonsBetwixt {
      * @param <T>
      * @return
      */
-    public <T> boolean persistObjectToFile(T t,String objecTname,String filename){
+    public static <T> boolean persistObjectToFile(T t,String objecTname,String filename){
 
         FileOutputStream out= null;
         try {
@@ -63,7 +58,7 @@ public class CommonsBetwixt {
         return true;
     }
 
-    public <T> boolean persistObjectToFile(T t){
+    public static <T> boolean persistObjectToFile(T t){
 
         String filename="betwixt.xml";
         FileOutputStream out= null;
@@ -109,7 +104,7 @@ public class CommonsBetwixt {
      * @param <T>
      * @return
      */
-    public <T> String persistObjectToString(T t,String objectName){
+    public static <T> String persistObjectToString(T t,String objectName){
 
         StringWriter stringWriter=new StringWriter();
         BeanWriter beanWriter=new BeanWriter(stringWriter);
