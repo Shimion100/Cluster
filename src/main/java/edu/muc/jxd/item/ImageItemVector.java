@@ -1,6 +1,5 @@
 package edu.muc.jxd.item;
 
-
 public class ImageItemVector<T extends Number> implements ItemInter {
 	/**
 	 * serialVersionUID
@@ -14,7 +13,7 @@ public class ImageItemVector<T extends Number> implements ItemInter {
 	 * 真实的数据
 	 */
 	private T data[];
-	
+
 	/**
 	 * 构造方法
 	 */
@@ -49,5 +48,16 @@ public class ImageItemVector<T extends Number> implements ItemInter {
 		this.id = id;
 	}
 
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		StringBuilder builder = new StringBuilder();
+		builder.append("ID:" + this.id + "; Data:");
+
+		for (T t : data) {
+			builder.append(t.toString()+" ");
+		}
+		return builder.toString();
+	}
+
 }

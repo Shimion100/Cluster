@@ -1,11 +1,15 @@
 package edu.muc.jxd.item;
 
+import edu.muc.jxd.tools.JSONTool;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
+
 
 /**
  * Created by gwd on 9/13/2016.
@@ -17,20 +21,44 @@ import java.util.List;
         "data"
 })
 public class ImageItemXmlElement {
-    private long id;
+    private int id;
     private String data;
 
     public ImageItemXmlElement(){
        // data=new ArrayList<>();
     }
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * to covert the string to Number[]
+     * @return
+     */
+    public ImageItemVector<Number> getDataToImageItemVector(){
+        if(data==null||id==0){
+            return null;
+        }
+        ImageItemVector<Number> imageItemVector=new ImageItemVector<>();
+        //TODO
+        String temp=data;
+        temp=temp.substring(1,temp.length()-1);
+        StringTokenizer tokenizer=new StringTokenizer(temp,",");
+        int l=tokenizer.countTokens();
+        Number[] numbers=new Number[l];
+        int i=0;
+        while (tokenizer.hasMoreElements()){
+            numbers[i++]=Integer.valueOf(tokenizer.nextToken().trim());
+        }
+
+        imageItemVector.setId(id);
+        imageItemVector.setData(numbers);
+        return imageItemVector;
+    }
     public String getData() {
         return data;
     }

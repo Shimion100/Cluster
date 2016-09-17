@@ -27,7 +27,7 @@ public class Cluster {
 	 * 
 	 * @param items
 	 */
-	public Cluster(List<ImageItemVector<Number>> items, DistenceInter distance, int dc) {
+	public Cluster(List<ImageItemVector<Number>> items, DistenceInter distance) {
 		this.itemList = items;
 		/*
 		 * 初始化 p和Delta。

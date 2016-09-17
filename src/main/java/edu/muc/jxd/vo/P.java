@@ -1,9 +1,13 @@
 package edu.muc.jxd.vo;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import edu.muc.jxd.distance.DistenceInter;
+import edu.muc.jxd.distance.ImageDistence;
 import edu.muc.jxd.item.ImageItemVector;
 
 public class P {
@@ -41,6 +45,8 @@ public class P {
 	 * 距离矩阵
 	 */
 	private int[][] distanceMatrix;
+	
+	private Logger logger=Logger.getLogger(ImageDistence.class.getName());
 
 	/**
 	 * *************************************************************************
@@ -56,6 +62,7 @@ public class P {
 		this.p = new int[length];
 		this.itemList = itemList;
 		this.distence = distence;
+		this.list4Dc = new ArrayList<Entropy>();
 		this.optimizeDc();
 	}
 
@@ -63,9 +70,10 @@ public class P {
 
 		// 条件要改,不应该是10000次。
 		int max = (int) (255 * this.p.length * 0.5);
-
-		for (int i = 0; i < max; i++) {
+	
+		for (int i = this.p.length * 3; i < max; i = i+10) {
 			this.dc = i;
+			logger.debug("dc = "+ dc);
 			this.initP();
 			// 开始计算熵
 			double z = 0.0;
