@@ -16,7 +16,7 @@ public class ImageDistence implements DistenceInter {
 		for (int i = 0; i < dataB.length; i++) {
 			int ta = dataA[i].intValue();
 			int tb =dataB[i].intValue();
-			distance = distance + ( ta - tb);
+			distance = distance + Math.abs(( ta - tb));
 		}
 		return distance;
 	}

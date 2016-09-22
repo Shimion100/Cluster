@@ -24,11 +24,7 @@ public class TestMain {
 				PathKit.getRootClassPath() + "\\image.xml");
 		logger.debug(object.getImagesData().toArray());
 		Iterator<ImageItemXmlElement> images = object.getImagesData().iterator();
-		CommonsBetwixt.persistObjectToFile(images);
-		while (images.hasNext()) {
-			ImageItemXmlElement imageItemXmlElement = images.next();
-			logger.debug(imageItemXmlElement.getDataToImageItemVector().getData().length);
-		}
-		CommonsBetwixt.persistObjectToFile(images);
+		CommonsBetwixt.persistObjectToFile(images);	
+		
 	}
 }

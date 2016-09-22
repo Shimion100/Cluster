@@ -1,6 +1,10 @@
 package edu.muc.jxd.vo;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -45,8 +49,8 @@ public class P {
 	 * 距离矩阵
 	 */
 	private int[][] distanceMatrix;
-	
-	private Logger logger=Logger.getLogger(ImageDistence.class.getName());
+
+	private Logger logger = Logger.getLogger(ImageDistence.class.getName());
 
 	/**
 	 * *************************************************************************
@@ -63,17 +67,15 @@ public class P {
 		this.itemList = itemList;
 		this.distence = distence;
 		this.list4Dc = new ArrayList<Entropy>();
-		this.optimizeDc();
+		this.optimizeDc(784, 2);
 	}
 
-	public void optimizeDc() {
+	public void optimizeDc(int max, int step) {
 
-		// 条件要改,不应该是10000次。
-		int max = (int) (255 * this.p.length * 0.5);
-	
-		for (int i = this.p.length * 3; i < max; i = i+10) {
+		// 条件要改,
+		for (int i = 1; i < max; i = i + step) {
 			this.dc = i;
-			logger.debug("dc = "+ dc);
+			logger.debug("dc = " + dc);
 			this.initP();
 			// 开始计算熵
 			double z = 0.0;
@@ -110,7 +112,38 @@ public class P {
 	 */
 	public void initP() {
 		this.computeDistanceMatrix();
+		this.printDistanceMatrix();
 		this.computeP();
+		this.printP();
+	}
+
+	/**
+	 * 將距离矩阵输出
+	 */
+
+	public void printDistanceMatrix() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("DistanceMatrix：\n");
+		for (int i = 0; i < this.distanceMatrix.length; i++) {
+			for (int j = 0; j < this.distanceMatrix[i].length; j++) {
+				builder.append(this.distanceMatrix[i][j] + " ");
+			}
+			builder.append("\n");
+		}
+		System.out.println(builder.toString());
+	}
+
+	/**
+	 * 输出p
+	 */
+	public void printP() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("p：\n");
+		for (int i = 0; i < this.p.length; i++) {
+			builder.append(this.p[i] + " ");
+		}
+		builder.append("\n");
+		System.out.println(builder.toString());
 	}
 
 	/**
@@ -155,7 +188,9 @@ public class P {
 	 * *************************************** 计算从Itemi到Itemj之间的距离.
 	 */
 	public int diff(int i, int j) {
-		return this.distence.getDistence(itemList.get(i), itemList.get(j));
+		int dis = this.distence.getDistence(itemList.get(i), itemList.get(j));
+		// logger.debug("disstance between "+i+" and "+j +" is "+dis);
+		return dis;
 	}
 
 	/**
@@ -179,6 +214,27 @@ public class P {
 			return;
 		} else {
 			this.distanceMatrix[i][j] = value;
+		}
+	}
+
+	/**
+	 * *************************************************************************
+	 * *************************************** write to file
+	 * 
+	 */
+
+	public void writetoFile(File fileName) {
+
+		try {
+			FileWriter writer = new FileWriter(fileName);
+			writer.write("dc :" + this.dc + "\n");
+			writer.write("entropy: " + Arrays.toString(this.getList4Dc().toArray()));
+			writer.write("p :" + Arrays.toString(this.getP()) + "\n");
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

@@ -46,13 +46,21 @@ public class ImageItemXmlElement {
         ImageItemVector<Number> imageItemVector=new ImageItemVector<>();
         //TODO
         String temp=data;
-        temp=temp.substring(1,temp.length()-1);
+        temp=temp.replace("[", "");
+        temp=temp.replace("]", "");
         StringTokenizer tokenizer=new StringTokenizer(temp,",");
         int l=tokenizer.countTokens();
         Number[] numbers=new Number[l];
         int i=0;
         while (tokenizer.hasMoreElements()){
-            numbers[i++]=Integer.valueOf(tokenizer.nextToken().trim());
+        	Integer x = Integer.valueOf(tokenizer.nextToken().trim());
+        	Integer y = 0;
+        	if (x > 128) {
+        		y = 0;
+        	} else {
+        		y = 1;
+        	}
+            numbers[i++]= y;
         }
 
         imageItemVector.setId(id);

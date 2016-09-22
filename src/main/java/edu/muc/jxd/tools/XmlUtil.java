@@ -79,7 +79,7 @@ public class XmlUtil {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println(XmlUtil.convertToXml(obj));
+			
 			marshaller.marshal(obj, isr);
 		
 		} catch (JAXBException e) {
@@ -119,10 +119,8 @@ public class XmlUtil {
 			try {
 				// fr = new FileReader(xmlPath);
 				isr = new InputStreamReader(new FileInputStream(xmlPath),
-						"UTF-8");				
-		    	System.out.println("convertXmlFileToObject Xml InputStreamReader：");
-				System.out.println(isr.toString());
-               xmlObject = unmarshaller.unmarshal(isr);
+						"UTF-8");		
+		        xmlObject = unmarshaller.unmarshal(isr);
 			} catch (UnsupportedEncodingException e) {
 			//	log.fatal("the Encode does not exist!" + e.getMessage());
 				return null;

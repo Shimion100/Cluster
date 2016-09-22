@@ -1,10 +1,13 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
 import edu.muc.jxd.cluster.Cluster;
+import edu.muc.jxd.distance.DistenceInter;
 import edu.muc.jxd.distance.ImageDistence;
+import edu.muc.jxd.distance.MixDistance;
 import edu.muc.jxd.item.ImageItemVector;
 import edu.muc.jxd.tools.ToImageVec;
 
@@ -30,15 +33,21 @@ public class Main {
 
 	@Test
 	public void testData() {
-		ImageDistence distance = new ImageDistence();
+		DistenceInter distance = new MixDistance();
+		//DistenceInter distance = new ImageDistence();
 		List<ImageItemVector<Number>> itemList = ToImageVec.getImageVec();
-		System.out.println(itemList);
 		Cluster cluster = new Cluster(itemList, distance);
 		System.out.println("ItemList");
-		System.out.println(cluster.getItemList().toString());
+		for (ImageItemVector<Number> imageItemVector : itemList) {
+			System.out.println(imageItemVector);
+		}
 		System.out.println("p");
 		System.out.println(cluster.getP().toString());
+		cluster.getP().writetoFile(new File("E:\\project\\cluster\\p.txt"));
 		System.out.println("Delta");
 		System.out.println(cluster.getDelta().toString());
+		cluster.getDelta().writetoFile(new File("E:\\project\\cluster\\delta.txt"));
+		System.out.println("dc="+cluster.getP().getDc());
+		cluster.printResult();
 	}
 }

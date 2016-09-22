@@ -1,6 +1,10 @@
 package edu.muc.jxd.vo;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -66,5 +70,22 @@ public class Delta {
 		this.value = value;
 	}
 	
+	/**
+	 * *************************************************************************
+	 * *************************************** write to file
+	 * 
+	 */
+	
+	public void writetoFile(File fileName) {
+		try {
+			FileWriter writer = new FileWriter(fileName);
+			writer.write("value :"+Arrays.toString(this.getValue())+"\n");
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }

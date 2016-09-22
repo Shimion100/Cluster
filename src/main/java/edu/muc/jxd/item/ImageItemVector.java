@@ -52,10 +52,14 @@ public class ImageItemVector<T extends Number> implements ItemInter {
 	public String toString() {
 		// TODO Auto-generated method stub
 		StringBuilder builder = new StringBuilder();
-		builder.append("ID:" + this.id + "; Data:");
+		builder.append("ID:" + this.id + "; Data:\n");
 
-		for (T t : data) {
+		for (int i = 1; i <= this.data.length; i++) {
+			T t = data[i-1];
 			builder.append(t.toString()+" ");
+			if (i % 28 == 0) {
+				builder.append("\n");
+			}
 		}
 		return builder.toString();
 	}
