@@ -7,7 +7,7 @@ import edu.muc.jxd.item.ImageItemVector;
 public class ImageDistence implements DistenceInter {
 
 	private Logger logger=Logger.getLogger(ImageDistence.class.getName());
-	@Override
+
 	public <T extends Number> int getDistence(ImageItemVector<T> a, ImageItemVector<T> b) {
 		//logger.debug("Distance"+a.getId()+"-"+b.getId());	
 		T [] dataA = (T[]) a.getData();
