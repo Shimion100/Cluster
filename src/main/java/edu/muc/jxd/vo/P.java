@@ -67,7 +67,7 @@ public class P {
 		this.itemList = itemList;
 		this.distence = distence;
 		this.list4Dc = new ArrayList<Entropy>();
-		this.optimizeDc(784, 2);
+		this.optimizeDc(784, 5);
 	}
 
 	public void optimizeDc(int max, int step) {
