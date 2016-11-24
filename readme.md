@@ -1,5 +1,6 @@
 # Introduce
 This is a java application to running for clusting image tool.
+And create for test repo.
 
 ## Environment
 * Java1.7+
