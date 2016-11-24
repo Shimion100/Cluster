@@ -1,11 +1,9 @@
-package edu.muc.jxd.mian;
+package edu.muc.jxd.main;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 
 import edu.muc.jxd.cluster.Cluster;
-import edu.muc.jxd.cluster.HistoryEntropy;
 import edu.muc.jxd.dataset.DataFormat;
 import edu.muc.jxd.distance.DistenceInter;
 import edu.muc.jxd.distance.SimpleDistance;
@@ -24,7 +22,7 @@ public class TestOtherDataSet {
 			System.out.println(imageItemVector);
 
 		}
-		Cluster cluster = new Cluster(result, distance, 1, 100000, 1);
+		Cluster cluster = new Cluster(result, distance, 0, -1, 5);
 
 		System.out.println(cluster.getP().toString());
 		cluster.getP().writetoFile(new File("E:\\project\\cluster\\" + filePath + "p.txt"));
@@ -33,7 +31,7 @@ public class TestOtherDataSet {
 		System.out.println("dc=" + cluster.getP().getDc());
 		cluster.printResult();
 
-		System.out.println("---------------------------------------------------");
+		cluster.getP().printEntropy();
 
 	}
 

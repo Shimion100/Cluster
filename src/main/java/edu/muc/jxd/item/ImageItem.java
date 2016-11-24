@@ -6,4 +6,9 @@ package edu.muc.jxd.item;
  */
 public class ImageItem<T extends Item<T>> extends Item<T>{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 }

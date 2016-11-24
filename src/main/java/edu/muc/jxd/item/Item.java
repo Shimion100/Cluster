@@ -2,7 +2,6 @@ package edu.muc.jxd.item;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -50,7 +49,6 @@ public class Item<T> implements Serializable, ItemInter {
 	}
 
 	// Object[] => N[] ?
-	@SuppressWarnings("unchecked")
 	protected <N extends Number> Object[] getNumberArrays() {
 		if (data.isEmpty())
 			return null;
@@ -63,17 +61,7 @@ public class Item<T> implements Serializable, ItemInter {
 			 * throw new ClassCastException("Type is not extends Number..."); }
 			 */
 			while (elementIterator.hasNext()) {
-				Element<N> numberElement;
 				try {
-					numberElement = (Element<N>) (elementIterator.next());
-					// TODO this is an error to convert it to save the model.
-					/*
-					 * numbers.add((N)(new Double(numberElement.plastic(new
-					 * ElmentNumeralization<N>() {
-					 * 
-					 * @Override public int numberalization(Number number) {
-					 * return number.intValue()+22; } }))));
-					 */
 				} catch (Exception e) {
 					System.err.println("Type Convert Number Error.");
 					e.printStackTrace();

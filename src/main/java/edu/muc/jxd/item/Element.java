@@ -5,14 +5,14 @@ import java.lang.reflect.Type;
 /**
  * Created by gwd on 9/10/2016.
  */
-public class Element<T> implements ElementNumeralization{
+public class Element<T> implements ElementNumeralization<Object>{
 
     protected T t;
 
     public Element(T t){
         this.t=t;
         this.clazz=t.getClass();
-        this.type=t.getClass().getGenericSuperclass();
+        this.setType(t.getClass().getGenericSuperclass());
     }
 
     public Element(){}
@@ -24,7 +24,7 @@ public class Element<T> implements ElementNumeralization{
     public boolean setElement(T t){
         this.t=t;
         this.clazz=t.getClass();
-        this.type=t.getClass().getGenericSuperclass();
+        this.setType(t.getClass().getGenericSuperclass());
         return true;
     }
 
@@ -45,4 +45,12 @@ public class Element<T> implements ElementNumeralization{
 
         return 0;
     }
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
 }

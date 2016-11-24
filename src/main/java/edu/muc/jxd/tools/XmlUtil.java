@@ -3,7 +3,6 @@ package edu.muc.jxd.tools;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -78,11 +77,11 @@ public class XmlUtil {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	/**
 	 * 将String类型的xml转换成对象
 	 */
-	public static Object convertXmlStrToObject(Class clazz, String xmlStr) {
+	public static Object convertXmlStrToObject(Class<?> clazz, String xmlStr) {
 		Object xmlObject = null;
 		try {
 			JAXBContext context = JAXBContext.newInstance(clazz);
@@ -96,16 +95,14 @@ public class XmlUtil {
 		return xmlObject;
 	}
 
-	@SuppressWarnings("unchecked")
 	/**
 	 * 将file类型的xml转换成对象
 	 */
-	public static Object convertXmlFileToObject(Class clazz, String xmlPath) {
+	public static Object convertXmlFileToObject(Class<?> clazz, String xmlPath) {
 		Object xmlObject = null;
 		try {
 			JAXBContext context = JAXBContext.newInstance(clazz);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-			FileReader fr = null;
 			InputStreamReader isr = null;
 			try {
 				// fr = new FileReader(xmlPath);

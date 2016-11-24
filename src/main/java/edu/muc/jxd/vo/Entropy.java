@@ -2,14 +2,14 @@ package edu.muc.jxd.vo;
 
 public class Entropy implements Comparable<Entropy> {
 
-	public int dc;
+	public double dc;
 
 	public double entropy;
 
 	public Entropy() {
 	}
 
-	public Entropy(int dc, double entropy) {
+	public Entropy(double dc, double entropy) {
 		this.dc = dc;
 		this.entropy = entropy;
 	}
@@ -23,7 +23,7 @@ public class Entropy implements Comparable<Entropy> {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return " dc =" + this.dc + " entropy = " + this.entropy +" ";
+		return this.dc + ":" + this.entropy;
 	}
 
 }

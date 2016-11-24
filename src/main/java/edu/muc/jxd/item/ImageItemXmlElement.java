@@ -1,77 +1,73 @@
 package edu.muc.jxd.item;
 
-import edu.muc.jxd.tools.JSONTool;
+import java.util.StringTokenizer;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
-
 
 /**
  * Created by gwd on 9/13/2016.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="Image")
-@XmlType(propOrder = {
-        "id",
-        "data"
-})
+@XmlRootElement(name = "Image")
+@XmlType(propOrder = { "id", "data" })
 public class ImageItemXmlElement {
-    private int id;
-    private String data;
+	private int id;
+	private String data;
 
-    public ImageItemXmlElement(){
-       // data=new ArrayList<>();
-    }
-    public int getId() {
-        return id;
-    }
+	public ImageItemXmlElement() {
+		// data=new ArrayList<>();
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    /**
-     * to covert the string to Number[]
-     * @return
-     */
-    public ImageItemVector<Number> getDataToImageItemVector(){
-        if(data==null||id==0){
-            return null;
-        }
-        ImageItemVector<Number> imageItemVector=new ImageItemVector<>();
-        //TODO
-        String temp=data;
-        temp=temp.replace("[", "");
-        temp=temp.replace("]", "");
-        StringTokenizer tokenizer=new StringTokenizer(temp,",");
-        int l=tokenizer.countTokens();
-        Number[] numbers=new Number[l];
-        int i=0;
-        while (tokenizer.hasMoreElements()){
-        	Integer x = Integer.valueOf(tokenizer.nextToken().trim());
-        	Integer y = 0;
-        	if (x > 128) {
-        		y = 0;
-        	} else {
-        		y = 1;
-        	}
-            numbers[i++]= y;
-        }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-        imageItemVector.setId(id);
-        imageItemVector.setData(numbers);
-        return imageItemVector;
-    }
-    public String getData() {
-        return data;
-    }
+	/**
+	 * to covert the string to Number[]
+	 * 
+	 * @return
+	 */
+	public ImageItemVector<Number> getDataToImageItemVector() {
+		if (data == null || id == 0) {
+			return null;
+		}
+		ImageItemVector<Number> imageItemVector = new ImageItemVector<>();
+		// TODO
+		String temp = data;
+		temp = temp.replace("[", "");
+		temp = temp.replace("]", "");
+		StringTokenizer tokenizer = new StringTokenizer(temp, ",");
+		int l = tokenizer.countTokens();
+		Number[] numbers = new Number[l];
+		int i = 0;
+		while (tokenizer.hasMoreElements()) {
+			Integer x = Integer.valueOf(tokenizer.nextToken().trim());
+			Integer y = 0;
+			if (x > 128) {
+				y = 0;
+			} else {
+				y = 1;
+			}
+			numbers[i++] = y;
+		}
 
-    public void setData(String data) {
-        this.data = data;
-    }
+		imageItemVector.setId(id);
+		imageItemVector.setData(numbers);
+		return imageItemVector;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
 }

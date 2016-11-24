@@ -111,10 +111,11 @@ public class JSONTool {
 	*@throws:@param str
 	*@throws:@return
 	 */
+	@SuppressWarnings("unchecked")
 	public static Map<String,HashSet<String>> JsonStringToMap(String str){
         gson=new Gson(); 
         Map<String, HashSet<String>> map = new HashMap<String, HashSet<String>>();
-        map=(Map<String, HashSet<String>>) gson.fromJson(str, map.getClass());
+		map = (Map<String, HashSet<String>>) gson.fromJson(str, map.getClass());
         return map;
 	}
 	
