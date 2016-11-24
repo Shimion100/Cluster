@@ -2,7 +2,13 @@ package edu.muc.jxd.distance;
 
 import edu.muc.jxd.item.ImageItemVector;
 
-public class ImageDistence implements DistenceInter {
+/**
+ * 欧几里得距离
+ * 
+ * @author Simon
+ *
+ */
+public class SimpleDistance implements DistenceInter {
 
 	@Override
 	public <T extends Number> int getDistence(ImageItemVector<T> a, ImageItemVector<T> b) {
@@ -13,8 +19,9 @@ public class ImageDistence implements DistenceInter {
 		for (int i = 0; i < dataB.length; i++) {
 			int ta = dataA[i].intValue();
 			int tb = dataB[i].intValue();
-			distance = distance + Math.abs((ta - tb));
+			distance = distance + (Math.abs((ta - tb)) ^ 2);
 		}
 		return distance;
 	}
+
 }

@@ -27,17 +27,17 @@ public class Main {
 		list.add(item2);
 
 		ImageDistence distance = new ImageDistence();
-		Cluster cluster = new Cluster(list, distance);
-		System.out.println(cluster.getDelta().toString());
+		//Cluster cluster = new Cluster(list, distance);
+		//System.out.println(cluster.getDelta().toString());
 	}
 
 	@Test
 	public void testData() {
 		DistenceInter distance = new MixDistance();
 		//DistenceInter distance = new ImageDistence();
-		List<ImageItemVector<Number>> itemList = ToImageVec.getImageVec();
-		Cluster cluster = new Cluster(itemList, distance);
-		System.out.println("ItemList");
+		//List<ImageItemVector<Number>> itemList = ToImageVec.getImageVec();
+		//Cluster cluster = new Cluster(itemList, distance);
+		/*System.out.println("ItemList");
 		for (ImageItemVector<Number> imageItemVector : itemList) {
 			System.out.println(imageItemVector);
 		}
@@ -48,6 +48,6 @@ public class Main {
 		System.out.println(cluster.getDelta().toString());
 		cluster.getDelta().writetoFile(new File("E:\\project\\cluster\\delta.txt"));
 		System.out.println("dc="+cluster.getP().getDc());
-		cluster.printResult();
+		cluster.printResult();*/
 	}
 }

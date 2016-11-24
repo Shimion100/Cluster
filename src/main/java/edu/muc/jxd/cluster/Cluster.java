@@ -15,6 +15,7 @@ public class Cluster {
 	private List<ImageItemVector<Number>> itemList;
 
 	private List<Result> resultList;
+	
 
 	/**
 	 * 用来计算小兵的肉
@@ -31,13 +32,13 @@ public class Cluster {
 	 * 
 	 * @param items
 	 */
-	public Cluster(List<ImageItemVector<Number>> items, DistenceInter distance) {
+	public Cluster(List<ImageItemVector<Number>> items, DistenceInter distance, int start, int end, int step) {
 		this.itemList = items;
 		this.resultList = new ArrayList<Result>();
 		/*
 		 * 初始化 p和Delta。
 		 */
-		this.p = new P(items.size(), items, distance);
+		this.p = new P(items.size(), items, distance, start, end, step);
 		this.delta = new Delta(items.size(), this.p);
 		this.initIdList();
 	}
@@ -55,12 +56,12 @@ public class Cluster {
 			this.resultList.add(result);
 		}
 	}
-	
+
 	public void printResult() {
 		Collections.sort(this.resultList);
 		StringBuilder builder = new StringBuilder();
 		for (Result result : this.resultList) {
-			builder.append(result.getId()+" : "+ result.getMutiplyResult()+"\n");
+			builder.append(result.getId() + " : "+"p: "+result.getP()+" D: "+result.getDelta() +" "+ result.getMutiplyResult() + "\n");
 		}
 		System.out.println(builder.toString());
 	}
@@ -88,5 +89,6 @@ public class Cluster {
 	public void setDelta(Delta delta) {
 		this.delta = delta;
 	}
+	
 
 }

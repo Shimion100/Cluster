@@ -1,3 +1,4 @@
+
 package edu.muc.jxd.vo;
 
 import java.io.File;
@@ -6,12 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import edu.muc.jxd.distance.DistenceInter;
-import edu.muc.jxd.distance.ImageDistence;
 import edu.muc.jxd.item.ImageItemVector;
 
 public class P {
@@ -32,6 +31,8 @@ public class P {
 
 	private int[] p;
 
+	private HashMap<Integer, List<Number>> pDetail;
+
 	/**
 	 * 距离
 	 */
@@ -50,8 +51,6 @@ public class P {
 	 */
 	private int[][] distanceMatrix;
 
-	private Logger logger = Logger.getLogger(ImageDistence.class.getName());
-
 	/**
 	 * *************************************************************************
 	 * *************************************** 构造方法
@@ -61,22 +60,24 @@ public class P {
 	 * @param distence
 	 */
 
-	public P(int length, List<ImageItemVector<Number>> itemList, DistenceInter distence) {
+	public P(int length, List<ImageItemVector<Number>> itemList, DistenceInter distence, int start, int end, int step) {
 		this.distanceMatrix = new int[length][length];
 		this.p = new int[length];
+		this.pDetail = new HashMap<>();
 		this.itemList = itemList;
 		this.distence = distence;
 		this.list4Dc = new ArrayList<Entropy>();
-		this.optimizeDc(784, 5);
+		this.optimizeDc(start, end, step);
 	}
 
-	public void optimizeDc(int max, int step) {
+	public void optimizeDc(int start, int max, int step) {
+		this.initP();
 
 		// 条件要改,
-		for (int i = 1; i < max; i = i + step) {
+		for (int i = start; i <= max; i = i + step) {
 			this.dc = i;
-			logger.debug("dc = " + dc);
-			this.initP();
+			System.out.print("dc = " + dc);
+			this.computeP();
 			// 开始计算熵
 			double z = 0.0;
 
@@ -94,6 +95,7 @@ public class P {
 			}
 			H = -H;
 			Entropy e = new Entropy(this.dc, H);
+			System.out.println(" H = " + H);
 			this.list4Dc.add(e);
 		}
 
@@ -114,7 +116,7 @@ public class P {
 		this.computeDistanceMatrix();
 		this.printDistanceMatrix();
 		this.computeP();
-		this.printP();
+		// this.printP();
 	}
 
 	/**
@@ -146,6 +148,17 @@ public class P {
 		System.out.println(builder.toString());
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("p：\n");
+		for (int i = 0; i < this.p.length; i++) {
+			builder.append(this.p[i] + " ");
+		}
+		builder.append("\n");
+		return builder.toString();
+	}
+
 	/**
 	 * 计算Distance
 	 */
@@ -171,14 +184,18 @@ public class P {
 		/*
 		 * 计算p，如果i与j的距离小于dc，则Pi+1
 		 */
+		this.pDetail = new HashMap<>();
 		for (int i = 0; i < distanceMatrix.length; i++) {
 			int aP = 0;
+			List<Number> pointList = new ArrayList<Number>();
 			for (int j = 0; j < distanceMatrix[i].length; j++) {
 				if (distanceMatrix[i][j] < this.dc) {
 					aP++;
+					pointList.add(j);
 				}
 			}
 			this.p[i] = aP;
+			this.pDetail.put(i, pointList);
 		}
 		// p计算完成。
 	}
@@ -228,7 +245,8 @@ public class P {
 		try {
 			FileWriter writer = new FileWriter(fileName);
 			writer.write("dc :" + this.dc + "\n");
-			writer.write("entropy: " + Arrays.toString(this.getList4Dc().toArray()));
+			// writer.write("entropy: " +
+			// Arrays.toString(this.getList4Dc().toArray()) + "\n");
 			writer.write("p :" + Arrays.toString(this.getP()) + "\n");
 			writer.flush();
 			writer.close();
@@ -274,6 +292,14 @@ public class P {
 
 	public void setList4Dc(List<Entropy> list4Dc) {
 		this.list4Dc = list4Dc;
+	}
+
+	public HashMap<Integer, List<Number>> getpDetail() {
+		return pDetail;
+	}
+
+	public void setpDetail(HashMap<Integer, List<Number>> pDetail) {
+		this.pDetail = pDetail;
 	}
 
 }

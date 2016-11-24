@@ -55,13 +55,28 @@ public class ImageItemVector<T extends Number> implements ItemInter {
 		builder.append("ID:" + this.id + "; Data:\n");
 
 		for (int i = 1; i <= this.data.length; i++) {
-			T t = data[i-1];
-			builder.append(t.toString()+" ");
+			T t = data[i - 1];
+			builder.append(t.toString() + " ");
 			if (i % 28 == 0) {
 				builder.append("\n");
 			}
 		}
 		return builder.toString();
+	}
+
+	public String printImage() {
+		// TODO Auto-generated method stub
+		StringBuilder builder = new StringBuilder();
+		builder.append("ID:" + this.id + "; Data:\n");
+
+		for (int i = 1; i <= this.data.length; i++) {
+			T t = data[i - 1];
+			builder.append(t.toString() + " ");
+			if (i % 28 == 0) {
+				builder.append("\n");
+			}
+		}
+		return builder.toString().replace('0', ' ');
 	}
 
 }
